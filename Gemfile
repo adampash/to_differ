@@ -38,6 +38,7 @@ end
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'guard-rspec'
   gem 'growl'
 end
