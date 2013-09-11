@@ -13,8 +13,8 @@ class Version < ActiveRecord::Base
   
 
   def is_new? hash
-    p unique_hash
-    p hash
+    # p "UNIQUE HASH: #{unique_hash}"
+    # p "NEW HASH: #{hash}"
     unique_hash != hash
   end
   

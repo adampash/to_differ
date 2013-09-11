@@ -1,0 +1,18 @@
+<div class="versions">Versions: <span class="number"></span></div>
+
+<div class="article">
+  
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var article = <%= raw @article.to_json(include: :versions) %>;
+    $('.versions .number').text(article.versions.length);
+    $('.article').html(
+      diffString(
+        article.versions[0].text,
+        article.versions[article.versions.length - 1].text
+      )
+    );
+  });
+</script>

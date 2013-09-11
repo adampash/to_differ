@@ -30,6 +30,10 @@ class Article < ActiveRecord::Base
     versions.last
   end
   
+  def first_version
+    versions.first
+  end
+  
   def version_already_exists? version
     if versions.count == 0 
       false
