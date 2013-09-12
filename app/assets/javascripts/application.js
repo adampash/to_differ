@@ -10,8 +10,12 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require diffstring
 //= require jquery
+//= require underscore
+//= require backbone
+//= require diffstring
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var App = App || {};

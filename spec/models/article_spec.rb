@@ -31,7 +31,7 @@ describe Article do
       article = Article.find_or_initialize url
       article.save
       
-      Article.any_instance.stub(:fetch).and_return(Factory.version 2)
+      Article.any_instance.stub(:get).and_return(Factory.version 2)
       article1 = Article.find_or_initialize url
       article1.save
       # article.reload

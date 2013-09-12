@@ -12,8 +12,8 @@
 function escape(s) {
     var n = s;
     n = n.replace(/&/g, "&amp;");
-    n = n.replace(/</g, "&lt;");
-    n = n.replace(/>/g, "&gt;");
+    // n = n.replace(/</g, "&lt;");
+    // n = n.replace(/>/g, "&gt;");
     n = n.replace(/"/g, "&quot;");
 
     return n;
@@ -22,6 +22,8 @@ function escape(s) {
 function diffString( o, n ) {
   o = o.replace(/\s+$/, '');
   n = n.replace(/\s+$/, '');
+  o = o.replace(/(<([^>]+)>)/ig, ' $1 ');
+  n = n.replace(/(<([^>]+)>)/ig, ' $1 ');
 
   var out = diff(o == "" ? [] : o.split(/\s+/), n == "" ? [] : n.split(/\s+/) );
   var str = "";
@@ -41,30 +43,39 @@ function diffString( o, n ) {
 
   if (out.n.length == 0) {
       for (var i = 0; i < out.o.length; i++) {
-        str += '<del>' + escape(out.o[i]) + oSpace[i] + "</del>";
+
+        str += '<del>' + escape(out.o[i]) + "</del>" + oSpace[i];
       }
   } else {
     if (out.n[0].text == null) {
       for (n = 0; n < out.o.length && out.o[n].text == null; n++) {
-        str += '<del>' + escape(out.o[n]) + oSpace[n] + "</del>";
+
+        str += '<del>' + escape(out.o[n]) + "</del>" + oSpace[n];
       }
     }
 
     for ( var i = 0; i < out.n.length; i++ ) {
       if (out.n[i].text == null) {
-        str += '<ins>' + escape(out.n[i]) + nSpace[i] + "</ins>";
+
+        str += '<ins>' + escape(out.n[i]) + "</ins>" + nSpace[i];
       } else {
         var pre = "";
 
         for (n = out.n[i].row + 1; n < out.o.length && out.o[n].text == null; n++ ) {
-          pre += '<del>' + escape(out.o[n]) + oSpace[n] + "</del>";
+
+          pre += '<del>' + escape(out.o[n]) + "</del>" + oSpace[n];
         }
         str += " " + out.n[i].text + nSpace[i] + pre;
       }
     }
   }
-  
+  str = str.replace(/__linebreak__/g, '<br />')
+  // str = merge_adjacent(str, ['del', 'ins'])
   return str;
+}
+
+function is_html(str) {
+  return str.match(/\<.*\>/) != null;
 }
 
 function randomColor() {
@@ -155,6 +166,5 @@ function diff( o, n ) {
       o[n[i].row-1] = { text: o[n[i].row-1], row: i - 1 };
     }
   }
-  
   return { o: o, n: n };
 }

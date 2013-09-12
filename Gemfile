@@ -15,7 +15,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-gem 'diffy'
 gem 'ruby-readability'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -41,6 +40,8 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'guard-rspec'
   gem 'growl'
+  gem "jasminerice", :git => 'https://github.com/bradphelan/jasminerice.git'
+  gem 'guard-jasmine'
 end
 
 # Use ActiveModel has_secure_password

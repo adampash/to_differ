@@ -1,0 +1,32 @@
+{
+  "id":1,
+  "url":"http://blog.adampash.com/2013/09/08/this-is-the-post",
+  "created_at":"2013-09-10T21:46:16.000Z",
+  "updated_at":"2013-09-10T21:46:16.000Z",
+  "versions":[
+    {
+      "id":1,
+      "text":"Hey friends and readers! I’m interrupting your daily dose of productivity and technology for a quick announcement",
+      "article_id":1,
+      "created_at":"2013-09-10T21:46:16.000Z",
+      "updated_at":"2013-09-10T21:46:16.000Z",
+      "unique_hash":"9163b180b7a22f1dd7fdb15c00804030"
+    },
+    {
+      "id":2,
+      "text":"Hey friends of readers! I’m interrupting your daily dose of technology for a quick announcement",
+      "article_id":1,
+      "created_at":"2013-09-11T18:01:51.000Z",
+      "updated_at":"2013-09-11T18:01:51.000Z",
+      "unique_hash":"ed21946e9a67ebb409705ef215f569fc"
+    },
+    {
+      "id":3,
+      "text":"Hey friends and dearest of readers! I’m interrupting your daily dose of technology for a quick announcement",
+      "article_id":1,
+      "created_at":"2013-09-12T18:01:51.000Z",
+      "updated_at":"2013-09-12T18:01:51.000Z",
+      "unique_hash":"ed21946e2a67ebb409705ef215f569fc"
+    }
+  ]
+}
