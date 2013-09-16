@@ -8,13 +8,13 @@ class App.ArticleView extends Backbone.View
     _.bindAll(@, 'render') # fixes loss of context for 'this' within methods
     _.bindAll(@, 'render_slider') # fixes loss of context for 'this' within methods
     @template = _.template($('#item-template').html())
+    @.$tiny = $('#tiny_article')
     @slider_template = _.template($('#slider-template').html())
-    @listenTo(@model, 'change:last_selected_version', @render_article)
-    @listenTo(@model, 'change:first_selected_version', @render_article)
+    @listenTo(@model, 'change', @render_article)
     @render() # not all views are self-rendering. This one is.
 
   render: ->
-    console.log 'render'
+    # console.log 'render'
     @render_article()
     @render_slider()
 
@@ -25,18 +25,22 @@ class App.ArticleView extends Backbone.View
     @.$el.find('#slider').slider()
       .on 'slide', (event) ->
         view.change_versions event.value
-    @.$el.find('.slider').width('370')
+    @.$el.find('.slider').width('100%')
     @.$el.find('.slider').height('70')
     @
 
   render_article: ->
-    # console.log 'render article'
-    console.log "diffing versions: ", @model.get('diffed_version').numbers
+    # console.log "diffing versions: ", @model.get('diffed_version').numbers
     if @.$article 
       @.$el.find('.article').remove()
+      @.$tiny.empty()
     console.log 'render article'
     @.$article = @template(@.model.toJSON())
     @.$el.append(@.$article)
+    @.$tiny.append(@.$article)
+
+    merge_adjacent('del')
+    merge_adjacent('ins')
     @
 
   change_versions: (values) ->

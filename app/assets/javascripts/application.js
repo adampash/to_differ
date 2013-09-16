@@ -19,3 +19,45 @@
 //= require_tree .
 
 var App = App || {};
+
+function merge_adjacent(type) {
+    var spans = $(type);
+    for ( var i = spans.length - 2; i >= 0; --i)
+    {
+       var span = spans[i];
+       var nextspan = spans[i + 1];
+      
+       merge(span, nextspan);
+    }
+}
+  
+function merge(span, nextspan) {
+  console.log('merge');
+  var follower = span.nextSibling;
+  var concat = true;
+  // console.log(follower);
+  // console.log(nextspan);
+  // if (follower == null) return;
+   while (follower && follower != nextspan)
+   {
+     if (follower.nodeName != '#text')
+     {
+       concat = false;
+       break;
+     }
+     var len = follower.data.trim().length;
+     if (len > 0)
+     {
+       concat = false;
+       break;
+     }
+
+     follower = follower.nextSibling;
+   }
+
+  if (concat)
+  {
+    $(span).text($(span).text() + " " + $(follower).text());
+    $(follower).remove();
+  }
+}

@@ -10,60 +10,20 @@
     //     article.versions[article.versions.length - 1].text
     //   )
     // );
-    // merge_adjacent('del');
-    // merge_adjacent('ins');
     new_article = new App.Article(article);
     av = new App.ArticleView({model: new_article});
     $('div.content').html(av.el);
+    merge_adjacent('del')
+    merge_adjacent('ins')
   });
-
-  function merge_adjacent(type) {
-      var spans = $(type);
-      for ( var i = spans.length - 2; i >= 0; --i)
-      {
-         var span = spans[i];
-         var nextspan = spans[i + 1];
-        
-         merge(span, nextspan);
-      }
-  }
-  
-  function merge(span, nextspan) {
-    console.log('merge');
-    var follower = span.nextSibling;
-    var concat = true;
-    // console.log(follower);
-    // console.log(nextspan);
-    // if (follower == null) return;
-     while (follower != nextspan)
-     {
-       if (follower.nodeName != '#text')
-       {
-         concat = false;
-         break;
-       }
-       var len = follower.data.trim().length;
-       if (len > 0)
-       {
-         concat = false;
-         break;
-       }
-
-       follower = follower.nextSibling;
-     }
-
-    if (concat)
-    {
-      $(span).text($(span).text() + " " + $(follower).text());
-      $(follower).remove();
-    }
-  }
 
 </script>
 
 <script type="text/template" id="slider-template">
   <div >
-    <input id="slider" type="text" class="span4" value="" data-slider-min="1" data-slider-max="{{= total_versions }}" data-slider-step="1" data-slider-value="[{{= first_selected_version }}, {{= last_selected_version }}]" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
+    {{ if (total_versions > 1) { }}
+      <input id="slider" type="text" class="span4" value="" data-slider-min="1" data-slider-max="{{= total_versions }}" data-slider-step="1" data-slider-value="[{{= first_selected_version }}, {{= last_selected_version }}]" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
+    {{ } }}
   </div>
   <b>{{= url }}</b><br>
 </script>
