@@ -7,13 +7,14 @@
  *
  * More Info:
  *  http://ejohn.org/projects/javascript-diff-algorithm/
+ *  http://www.scribd.com/doc/1461552/A-technique-for-isolating-differences-between-files
  */
 
 function escape(s) {
     var n = s;
     n = n.replace(/&/g, "&amp;");
-    n = n.replace(/</g, "&ltt;");
-    n = n.replace(/>/g, "&gtt;");
+    n = n.replace(/</g, "&lt;");
+    n = n.replace(/>/g, "&gt;");
     n = n.replace(/"/g, "&quot;");
 
     return n;
@@ -27,6 +28,8 @@ function diffString( o, n ) {
   console.log(o);
   console.log(n);
 
+  // [Benjamin Netanyahu](https://twitter.com/netanyahu)
+  // /[.*](.*)/
 
   var out = diff(o == "" ? [] : o.split(/\s+/), n == "" ? [] : n.split(/\s+/) );
   var str = "";
@@ -71,7 +74,7 @@ function diffString( o, n ) {
   }
 
   // str = merge_adjacent(str, ['del', 'ins'])
-  str = str.replace(/&ltt;/g, "wtf").replace(/&gtt;/g, "wtfrighte");
+  // str = str.replace(/&ltt;/g, "wtf").replace(/&gtt;/g, "wtfrighte");
   console.log(str);
   return str;
 }
