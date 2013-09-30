@@ -120,6 +120,8 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    reverse_markdown (0.4.6)
+      nokogiri
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -185,6 +187,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
+  reverse_markdown
   rspec
   rspec-rails
   ruby-readability
