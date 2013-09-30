@@ -31,12 +31,12 @@ class App.ArticleView extends Backbone.View
 
   render_article: ->
     # console.log "diffing versions: ", @model.get('diffed_version').numbers
-    if @.$article 
+    if @.$article
       @.$el.find('.article').remove()
       @.$tiny.empty()
-    console.log 'render article'
+    # console.log 'render article'
     @.$article = @template(@.model.toJSON())
-    @.$el.append(@.$article)
+    @.$el.append(@.$article.replace(/\$del\$/g, '<del>').replace(/\$\/del\$/g, '</del>').replace(/\$ins\$/g, '<ins>').replace(/\$\/ins\$/g, '</ins>'))
     @.$tiny.append(@.$article)
 
     merge_adjacent('del')

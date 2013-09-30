@@ -22,7 +22,7 @@ class App.Article extends Backbone.Model
       total_versions  : @.get('versions').length
     )
     @.set(
-      diffed_version  : 
+      diffed_version  :
         text: diffString(@.get('first_version'), @.get('last_version'))
         numbers:
           [

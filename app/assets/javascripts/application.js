@@ -14,6 +14,7 @@
 //= require underscore
 //= require backbone
 //= require diffstring
+//= require markdown
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
@@ -26,13 +27,13 @@ function merge_adjacent(type) {
     {
        var span = spans[i];
        var nextspan = spans[i + 1];
-      
+
        merge(span, nextspan);
     }
 }
-  
+
 function merge(span, nextspan) {
-  console.log('merge');
+  // console.log('merge');
   var follower = span.nextSibling;
   var concat = true;
   // console.log(follower);
