@@ -17,7 +17,7 @@ class Article < ActiveRecord::Base
   
   def fetch
     source = get url
-    content = Readability::Document.new(source, {remove_empty_nodes: true}).content
+    content = Readability::Document.new(source, {remove_empty_nodes: true, tags: %w(p div a)}).content
     # p 'fetchin'
     content
   end

@@ -3,13 +3,6 @@
 <script type="text/javascript">
   $(function() {
     window.article = <%= raw @article.to_json(include: :versions) %>;
-    // $('.versions .number').text(article.versions.length);
-    // $('.article').html(
-    //   diffString(
-    //     article.versions[0].text,
-    //     article.versions[article.versions.length - 1].text
-    //   )
-    // );
     new_article = new App.Article(article);
     av = new App.ArticleView({model: new_article});
     $('div.content').html(av.el);
