@@ -17,7 +17,7 @@ class Article < ActiveRecord::Base
 
   def fetch
     source = get url
-    content = Readability::Document.new(source, {remove_empty_nodes: true, tags: %w(p div a)}).content
+    content = Readability::Document.new(source, {remove_empty_nodes: true, tags: %w(p div a img), :attributes => %w[src href]}).content
     # p 'fetchin'
     ReverseMarkdown.parse content
   end
