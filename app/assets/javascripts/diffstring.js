@@ -21,10 +21,11 @@ function escape(s) {
 }
 
 function diffString( o, n ) {
-  o = o.replace(/(<([^>]+)>)/ig, ' $1 ');
-  n = n.replace(/(<([^>]+)>)/ig, ' $1 ');
   o = o.replace(/\s+$/, '');
   n = n.replace(/\s+$/, '');
+  var link_re = /\s(?=[^\[]*\])/g;
+  o = o.replace(link_re, '$spacebar$')
+  n = n.replace(link_re, '$spacebar$')
   console.log(o);
   console.log(n);
 

@@ -36,7 +36,11 @@ class App.ArticleView extends Backbone.View
       @.$tiny.empty()
     # console.log 'render article'
     @.$article = @template(@.model.toJSON())
-    text = @.$article.replace(/\$del\$/g, '<del>').replace(/\$\/del\$/g, '</del>').replace(/\$ins\$/g, '<ins>').replace(/\$\/ins\$/g, '</ins>')
+    text = @.$article.replace(/\$del\$/g, '<del>')
+                     .replace(/\$\/del\$/g, '</del>')
+                     .replace(/\$ins\$/g, '<ins>')
+                     .replace(/\$\/ins\$/g, '</ins>')
+                     .replace(/\$spacebar\$/g, ' ')
     @.$el.append(text)
     @.$tiny.append(text)
 
