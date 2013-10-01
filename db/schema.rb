@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910201525) do
+ActiveRecord::Schema.define(version: 20131001162722) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20130910201525) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "unique_hash"
+    t.string   "title"
   end
 
 end

@@ -39,7 +39,6 @@ describe Article do
     end
 
     it "returns a title" do
-      pending "needs implimentation"
       url = 'http://blog.adampash.com/2013/09/08/this-is-the-post'
       article = Article.find_or_initialize url
       expect(article.title).to_not be_empty

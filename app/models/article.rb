@@ -8,8 +8,8 @@ class Article < ActiveRecord::Base
   class << self
     def find_or_initialize url
       article = Article.find_or_initialize_by url: url
-      text = article.fetch
-      version = Version.new(text: text)
+      content = article.fetch
+      version = Version.new(text: content[:text], title: content[:title])
       article.versions << version unless article.version_already_exists?(version)
       article
     end
@@ -17,13 +17,24 @@ class Article < ActiveRecord::Base
 
   def fetch
     source = get url
-    content = Readability::Document.new(source, {remove_empty_nodes: true, tags: %w(p div a img), :attributes => %w[src href]}).content
-    # p 'fetchin'
-    ReverseMarkdown.parse content
+    article = Readability::Document.new(
+      source,
+      {
+        remove_empty_nodes: true,
+        tags: %w(p div a img ul ol li blockquote),
+        :attributes => %w[src href]
+      }
+    )
+    text = ReverseMarkdown.parse("<h2>#{article.title}</h2>" + article.content)
+    content = {text: text, title: article.title}
   end
 
   def text
     versions.first.text unless versions.empty?
+  end
+
+  def title
+    versions.last.title
   end
 
   def latest_version
