@@ -19,7 +19,6 @@ class App.ArticleView extends Backbone.View
     @render_slider()
 
   render_slider: ->
-    console.log 'render slider'
     view = @
     @.$el.prepend @slider_template(@.model.toJSON())
     @.$el.find('#slider').slider()

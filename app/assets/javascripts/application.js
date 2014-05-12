@@ -13,7 +13,7 @@
 //= require jquery
 //= require underscore
 //= require backbone
-//= require diffstring
+//= require diff
 //= require markdown
 //= require jquery_ujs
 //= require turbolinks

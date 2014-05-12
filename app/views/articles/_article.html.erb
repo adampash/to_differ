@@ -11,14 +11,15 @@
   });
 
 </script>
-
 <script type="text/template" id="slider-template">
-  <div >
+  <div class="span7 slide_container">
+    <div class="span5">
     {{ if (total_versions > 1) { }}
       <input id="slider" type="text" class="span4" value="" data-slider-min="1" data-slider-max="{{= total_versions }}" data-slider-step="1" data-slider-value="[{{= first_selected_version }}, {{= last_selected_version }}]" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
     {{ } }}
   </div>
   <b>{{= url }}</b><br>
+  </div>
 </script>
 
 

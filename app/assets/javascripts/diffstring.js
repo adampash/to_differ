@@ -29,9 +29,6 @@ function diffString( o, n ) {
   console.log(o);
   console.log(n);
 
-  // [Benjamin Netanyahu](https://twitter.com/netanyahu)
-  // /[.*](.*)/
-
   var out = diff(o == "" ? [] : o.split(/\s+/), n == "" ? [] : n.split(/\s+/) );
   var str = "";
 
