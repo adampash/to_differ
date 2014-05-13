@@ -56,6 +56,9 @@ class Article < ActiveRecord::Base
   private
 
   def get url
-    open(url).read
+    # open(url).read
+    agent = Mechanize.new
+    page = agent.get url
+    page.content
   end
 end
