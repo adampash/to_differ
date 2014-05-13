@@ -23,7 +23,8 @@ class App.Article extends Backbone.Model
     )
     @.set(
       diffed_version  :
-        text: Diff.parse(@.get('first_version'), @.get('last_version'))
+        # text: Diff.parse(@.get('first_version'), @.get('last_version'))
+        text: differ.parse(@.get('first_version'), @.get('last_version'))
         numbers:
           [
             @.get('first_selected_version')
