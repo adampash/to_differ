@@ -193,6 +193,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   pg
+  pry
   rails (= 4.0.0)
   reverse_markdown
   rspec
