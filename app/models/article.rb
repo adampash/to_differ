@@ -25,7 +25,7 @@ class Article < ActiveRecord::Base
         :attributes => %w[src href]
       }
     )
-    text = ReverseMarkdown.parse("<h2>#{article.title}</h2>" + article.content)
+    text = ReverseMarkdown.convert("<h2>#{article.title}</h2>" + article.content)
     content = {text: text, title: article.title}
   end
 
