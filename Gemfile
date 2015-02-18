@@ -8,6 +8,9 @@ gem 'rails', '4.2.0'
 # gem 'sqlite3'
 gem 'pg'
 
+# serve static assets on heroku
+gem 'rails_12factor', group: :production
+
 # mechanize to accept cookies/follow redirects
 gem 'mechanize'
 
