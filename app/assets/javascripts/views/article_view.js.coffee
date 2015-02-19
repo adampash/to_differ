@@ -40,6 +40,13 @@ class App.ArticleView extends Backbone.View
                      .replace(/\$ins\$/g, '<ins>')
                      .replace(/\$\/ins\$/g, '</ins>')
                      .replace(/\$spacebar\$/g, ' ')
+    text = decodeURIComponent(text)
+    missing_space_regex = /<\/a>(\w)/g
+    match = missing_space_regex.exec(text)
+    while match?
+      index = match.index + 4
+      text = text.slice(0, index) + " " + text.slice(index)
+      match = missing_space_regex.exec(text)
     @.$el.append(text)
     @.$tiny.append(text)
 
