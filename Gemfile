@@ -13,6 +13,7 @@ gem 'rails_12factor', group: :production
 
 # mechanize to accept cookies/follow redirects
 gem 'mechanize'
+gem 'httparty'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

@@ -1,4 +1,5 @@
-require 'open-uri'
+require 'httparty'
+TXT_FETCH_API = "http://text-fetch.herokuapp.com/"
 
 class Article < ActiveRecord::Base
   validates :url, uniqueness: true
@@ -8,25 +9,19 @@ class Article < ActiveRecord::Base
   class << self
     def find_or_initialize url
       article = Article.find_or_initialize_by url: url
-      content = article.fetch
-      version = Version.new(text: content[:text], title: content[:title])
+      content = JSON.parse article.fetch
+      version = Version.new(
+                  text: content["text"]["markdown"],
+                  title: content["title"]
+                )
+
       article.versions << version unless article.version_already_exists?(version)
       article
     end
   end
 
   def fetch
-    source = get url
-    article = Readability::Document.new(
-      source,
-      {
-        remove_empty_nodes: true,
-        tags: %w(p div a img ul ol li blockquote),
-        :attributes => %w[src href]
-      }
-    )
-    text = ReverseMarkdown.convert("<h2>#{article.title}</h2>" + article.content)
-    content = {text: text, title: article.title}
+    HTTParty.post TXT_FETCH_API, {body: {format: 'markdown', url: url}}
   end
 
   def text
