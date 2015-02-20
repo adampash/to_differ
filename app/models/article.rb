@@ -11,23 +11,39 @@ class Article < ActiveRecord::Base
       article = Article.find_or_initialize_by url: url
 
       if article.new_record?
-        save_version = true
-      else
-        hash = article.get_latest_hash
-        save_version = article.latest_version.is_new?(hash)
+        article.save
+        article.update_attribute('check_at', article.created_at + 1.minute)
+        Article.fetch_new_version article.id
       end
-      if save_version
-        content = JSON.parse article.fetch
+      article
+    end
+
+    def fetch_new_version(article_id)
+      article = Article.find article_id
+      content = JSON.parse article.fetch
+      if article.version_already_exists?(content["hash"])
+        article.set_next_check
+      else
         version = Version.new(
                     text: content["text"]["markdown"],
                     title: content["title"],
                     unique_hash: content["hash"]
                   )
 
-        article.versions << version unless article.version_already_exists?(version)
+        article.versions << version
+        article.update_attribute('check_at', article.updated_at + 1.minute)
       end
-      article
     end
+
+    def needs_refresh
+      where('check_at < ?', Time.now)
+    end
+  end
+
+  def set_next_check
+    new_check = Time.now + (Time.now - latest_version.created_at)*2
+    new_check = [new_check, Time.now + 2.days].min
+    update_attribute('check_at', new_check)
   end
 
   def fetch
@@ -56,11 +72,11 @@ class Article < ActiveRecord::Base
     versions.first
   end
 
-  def version_already_exists? version
+  def version_already_exists? unique_hash
     if versions.count == 0
       false
     else
-      versions.where(unique_hash: version.unique_hash).count > 0
+      versions.where(unique_hash: unique_hash).count > 0
     end
   end
 

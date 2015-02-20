@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131001162722) do
+ActiveRecord::Schema.define(version: 20150220204612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: true do |t|
+  create_table "articles", force: :cascade do |t|
     t.text     "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "check_at"
   end
 
-  create_table "versions", force: true do |t|
+  create_table "versions", force: :cascade do |t|
     t.text     "text"
     t.integer  "article_id"
     t.datetime "created_at"
