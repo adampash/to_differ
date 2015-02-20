@@ -17,14 +17,15 @@ class App.Article extends Backbone.Model
 
   computedAttributes: ->
     @.set(
-      first_version   : @.get('versions')[@.get('first_selected_version') - 1].text
-      last_version    : @.get('versions')[@.get('last_selected_version') - 1].text
+      first_version   : @.get('versions')[@.get('first_selected_version') - 1]
+      last_version    : @.get('versions')[@.get('last_selected_version') - 1]
       total_versions  : @.get('versions').length
     )
     @.set(
       diffed_version  :
         # text: Diff.parse(@.get('first_version'), @.get('last_version'))
-        text: differ.parse(@.get('first_version'), @.get('last_version'))
+        text: differ.parse(@.get('first_version').text, @.get('last_version').text)
+        title: differ.parse(@.get('first_version').title, @.get('last_version').title)
         numbers:
           [
             @.get('first_selected_version')
