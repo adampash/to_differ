@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
   def index
-    @articles = Article.all
+    @articles = Article.order(updated_at: :desc)
   end
 
   def show
