@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  protect_from_forgery except: :post
 
   def index
     @articles = Article.order(updated_at: :desc)
