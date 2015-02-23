@@ -3,6 +3,7 @@ ToDiffer::Application.routes.draw do
 
   root 'articles#index'
   get 'articles' => 'articles#show', as: :articles
+  post 'articles' => 'articles#create', as: :articles
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
