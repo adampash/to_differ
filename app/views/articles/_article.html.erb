@@ -30,7 +30,7 @@
     <br>
     <h2>{{= diffed_version.title }}</h2>
     <div class="version1">
-      {{= markdown.toHTML(diffed_version.text) }}
+      {{= markdown.toHTML(diffed_version.text.replace(/\n\n\s+/g, "\n\n")) }}
     </div>
   </div>
 </script>
