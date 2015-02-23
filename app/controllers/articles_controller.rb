@@ -14,8 +14,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.find_or_initialize params[:url]
-    unless @article.save
-      render text: "Something went wrong"
+    if @article.save
+      render json: {success: true}
+    else
+      render json: {success: false}
     end
   end
 end
