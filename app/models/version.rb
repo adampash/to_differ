@@ -3,8 +3,6 @@ require 'digest/md5'
 class Version < ActiveRecord::Base
   belongs_to :article
 
-  # after_initialize :generate_hash
-
   validates :unique_hash, presence: true
 
   class << self
@@ -13,8 +11,6 @@ class Version < ActiveRecord::Base
 
 
   def is_new? hash
-    # p "UNIQUE HASH: #{unique_hash}"
-    # p "NEW HASH: #{hash}"
     unique_hash != hash
   end
 

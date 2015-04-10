@@ -20,14 +20,14 @@ class Article < ActiveRecord::Base
 
     def fetch_new_version(article_id)
       article = Article.find article_id
-      content = JSON.parse article.fetch
-      if article.version_already_exists?(content["hash"])
+      content = article.fetch
+      if article.version_already_exists?(content["md5"])
         article.set_next_check
       else
         version = Version.new(
-                    text: content["text"]["markdown"],
+                    text: content["text"],
                     title: content["title"],
-                    unique_hash: content["hash"]
+                    unique_hash: content["md5"]
                   )
 
         article.versions << version
@@ -47,7 +47,18 @@ class Article < ActiveRecord::Base
   end
 
   def fetch
-    HTTParty.post TXT_FETCH_API, {body: {format: 'markdown', url: url}}
+    params = {body:
+      {
+        format: 'markdown',
+        url: url,
+      }
+    }
+    params[:body][:md5] = md5 unless md5.nil?
+    HTTParty.post TXT_FETCH_API, params
+  end
+
+  def md5
+    latest_version.unique_hash unless versions.length == 0
   end
 
   def get_latest_hash
