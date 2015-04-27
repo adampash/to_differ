@@ -1,5 +1,5 @@
 require 'httparty'
-TXT_FETCH_API = "http://text-fetch.herokuapp.com"
+TXT_FETCH_API = "https://text-fetch.herokuapp.com"
 
 class Article < ActiveRecord::Base
   validates :url, uniqueness: true
